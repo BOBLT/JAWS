@@ -71,15 +71,15 @@ body{
   pointer-events:none;
 }
 
-/* NEW: Solo Great White */
+/* Solo Great White (SECOND IMAGE) — LOWERED */
 .big-shark {
   position: absolute;
   width: 70%;
   left: 50%;
-  top: -35px;              /* raises the shark above the black dot */
+  top: 10px;               /* LOWERED from -35px → 10px */
   transform: translateX(-50%);
-  z-index: 5;              /* ensures it sits ABOVE the black circle */
-  pointer-events: none;    /* prevents interference with dragging */
+  z-index: 5;
+  pointer-events: none;
 }
 
 #zero{
@@ -139,15 +139,15 @@ th{color:#aaa;font-weight:500}
     <img class="centerGif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdvYTc2M3Q4ZjRxamV2c3Uzd3Y5bTR4Ynl6Y25rN3JkNHJxcGJwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AqP064Ap7tPOQmySbL/giphy.gif">
     <img class="centerGif" src="https://media2.giphy.com/media/ygCH1tcZQEgruPzaSi/giphy.gif?cid=6c09b9522f3coamio6dhhvsajg1eycpie36lfmnk6k0b1s12">
 
-    <!-- NEW GREAT WHITE IMAGE -->
-    <img class="big-shark" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdvYTc2M3Q4ZjRxamV2c3Uzd3Y5bTR4Ynl6Y25rN3JkNHJxcGJwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AqP064Ap7tPOQmySbL/giphy.gif">
+    <!-- SECOND IMAGE (GREAT WHITE) — LOWERED -->
+    <img class="big-shark" src="https://i.imgur.com/5nQxw0H.png">
 
     <div id="zero"></div>
     <img id="img">
   </div>
 
   <div id="panel">
-    <input type="file" id="file" accept="https://media2.giphy.com/media/ygCH1tcZQEgruPzaSi/giphy.gif?cid=6c09b9522f3coamio6dhhvsajg1eycpie36lfmnk6k0b1s12">
+    <input type="file" id="file" accept="image/jpeg,image/jpg">
   </div>
 </div>
 
