@@ -71,6 +71,17 @@ body{
   pointer-events:none;
 }
 
+/* NEW: Solo Great White */
+.big-shark {
+  position: absolute;
+  width: 70%;
+  left: 50%;
+  top: -35px;              /* raises the shark above the black dot */
+  transform: translateX(-50%);
+  z-index: 5;              /* ensures it sits ABOVE the black circle */
+  pointer-events: none;    /* prevents interference with dragging */
+}
+
 #zero{
   width:120px;
   height:120px;
@@ -127,6 +138,9 @@ th{color:#aaa;font-weight:500}
     <!-- SHARK GIF CENTERPIECE -->
     <img class="centerGif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdvYTc2M3Q4ZjRxamV2c3Uzd3Y5bTR4Ynl6Y25rN3JkNHJxcGJwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AqP064Ap7tPOQmySbL/giphy.gif">
     <img class="centerGif" src="https://media2.giphy.com/media/ygCH1tcZQEgruPzaSi/giphy.gif?cid=6c09b9522f3coamio6dhhvsajg1eycpie36lfmnk6k0b1s12">
+
+    <!-- NEW GREAT WHITE IMAGE -->
+    <img class="big-shark" src="https://i.imgur.com/5nQxw0H.png">
 
     <div id="zero"></div>
     <img id="img">
