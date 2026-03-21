@@ -4,12 +4,75 @@
 <meta charset="UTF-8">
 <title>jaw$</title>
 <style>
-body{margin:0;background:#05060a;color:#eee;font-family:system-ui,Segoe UI,Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh}
+body{
+  margin:0;
+  background:#05060a;
+  color:#eee;
+  font-family:system-ui,Segoe UI,Arial,sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* Overlay Circle + Panel */
+#overlay{
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:180px;
+  height:180px;
+  pointer-events:none;
+}
+
+#circle{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(6px);
+  box-shadow:0 0 18px rgba(0,0,0,0.4);
+}
+
+#overlayPanel{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:140px;
+  pointer-events:auto;
+}
+
+/* Main Stage */
 #wrap{display:flex;gap:24px;align-items:center}
-#stage{position:relative;width:360px;height:360px;background:#0b0d14;border-radius:50%;display:flex;justify-content:center;align-items:center;overflow:hidden}
-#zero{width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,0.8);box-shadow:0 0 24px rgba(0,0,0,0.9)}
-#img{position:absolute;max-width:40%;max-height:40%;cursor:grab;display:none}
-#panel{min-width:260px}
+#stage{
+  position:relative;
+  width:360px;
+  height:360px;
+  background:#0b0d14;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+#zero{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.8);
+  box-shadow:0 0 24px rgba(0,0,0,0.9);
+}
+#img{
+  position:absolute;
+  max-width:40%;
+  max-height:40%;
+  cursor:grab;
+  display:none;
+}
+
+/* Table */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:4px 6px;border-bottom:1px solid #222;text-align:left}
 th{color:#aaa;font-weight:500}
@@ -18,13 +81,13 @@ th{color:#aaa;font-weight:500}
 #file{margin-top:12px;font-size:12px}
 </style>
 </head>
+
 <body>
-<div id="wrap">
-  <div id="stage">
-    <div id="zero"></div>
-    <img id="img">
-  </div>
-  <div id="panel">
+
+<!-- TOP‑RIGHT OVERLAY -->
+<div id="overlay">
+  <div id="circle"></div>
+  <div id="overlayPanel">
     <div id="amp">0.00</div>
     <div id="slot">Slot 0 · Quiet</div>
     <table>
@@ -39,6 +102,17 @@ th{color:#aaa;font-weight:500}
         <tr><td>4</td><td>&gt;= 2.0</td><td id="s4">–</td></tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- MAIN FIELD -->
+<div id="wrap">
+  <div id="stage">
+    <div id="zero"></div>
+    <img id="img">
+  </div>
+
+  <div id="panel">
     <input type="file" id="file" accept="image/jpeg,image/jpg">
   </div>
 </div>
@@ -68,9 +142,11 @@ function tick(){
   else if(v>=1&&v<1.5)k=2;
   else if(v>=1.5&&v<2)k=3;
   else if(v>=2)k=4;
+
   ampEl.textContent=a;
   slotEl.textContent=slotLabel(k);
   cells.forEach((c,i)=>c.textContent=i===k?"active":"–");
+
   const scale=1+v*0.25;
   const opacity=Math.min(0.9,0.4+v*0.2);
   zero.style.transform="scale("+scale+")";
@@ -105,11 +181,10 @@ document.addEventListener("mouseup",()=>{
 });
 document.addEventListener("mousemove",e=>{
   if(!drag)return;
-  const x=e.clientX-ox;
-  const y=e.clientY-oy;
-  img.style.left=x+"px";
-  img.style.top=y+"px";
+  img.style.left=(e.clientX-ox)+"px";
+  img.style.top=(e.clientY-oy)+"px";
 });
-</script>  
+</script>
+
 </body>
 </html>
