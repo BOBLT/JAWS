@@ -35,14 +35,14 @@ body{
   box-shadow:0 0 18px rgba(0,0,0,0.4);
 }
 
-/* NEW — NVIDIA‑style translucent image layer */
+/* NVIDIA‑style translucent image layer */
 #circleImage{
   position:absolute;
   width:100%;
   height:100%;
   border-radius:50%;
   object-fit:cover;
-  opacity:0.28; /* adjust to taste */
+  opacity:0.28;
   pointer-events:none;
 }
 
@@ -95,10 +95,10 @@ th{color:#aaa;font-weight:500}
 
 <body>
 
-<!-- TOP‑RIGHT OVERLAY -->
+<!-- TOP‑RIGHT OVERLAY (correct placement) -->
 <div id="overlay">
   <div id="circle"></div>
-  <img id="circleImage"> <!-- NEW -->
+  <img id="circleImage">
   <div id="overlayPanel">
     <div id="amp">0.00</div>
     <div id="slot">Slot 0 · Quiet</div>
@@ -178,8 +178,7 @@ file.addEventListener("change",e=>{
     img.style.top="50%";
     img.style.transform="translate(-50%,-50%)";
 
-    /* NEW — feed image into NVIDIA‑style circle */
-    circleImage.src = ev.target.result;
+    circleImage.src = ev.target.result;  // now works because element exists
   };
   r.readAsDataURL(f);
 });
