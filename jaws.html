@@ -25,24 +25,14 @@ body{
   pointer-events:none;
 }
 
+/* NVIDIA circle logo as full background */
 #circle{
   position:absolute;
   width:100%;
   height:100%;
   border-radius:50%;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(6px);
-  box-shadow:0 0 18px rgba(0,0,0,0.4);
-}
-
-/* NVIDIA‑style translucent image layer */
-#circleImage{
-  position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  opacity:0.28;
+  background:url("https://www.citypng.com/public/uploads/preview/geforce-nvidia-circle-white-icon-701751694965668xskf337fdr.png")
+             center/contain no-repeat;
   pointer-events:none;
 }
 
@@ -95,10 +85,9 @@ th{color:#aaa;font-weight:500}
 
 <body>
 
-<!-- TOP‑RIGHT OVERLAY (correct placement) -->
+<!-- TOP‑RIGHT OVERLAY -->
 <div id="overlay">
   <div id="circle"></div>
-  <img id="circleImage">
   <div id="overlayPanel">
     <div id="amp">0.00</div>
     <div id="slot">Slot 0 · Quiet</div>
@@ -136,7 +125,6 @@ const zero=document.getElementById("zero");
 const cells=[0,1,2,3,4].map(i=>document.getElementById("s"+i));
 const file=document.getElementById("file");
 const img=document.getElementById("img");
-const circleImage=document.getElementById("circleImage");
 const stage=document.getElementById("stage");
 
 function slotLabel(k){
@@ -177,8 +165,6 @@ file.addEventListener("change",e=>{
     img.style.left="50%";
     img.style.top="50%";
     img.style.transform="translate(-50%,-50%)";
-
-    circleImage.src = ev.target.result;  // now works because element exists
   };
   r.readAsDataURL(f);
 });
