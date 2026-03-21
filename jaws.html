@@ -3,11 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <title>jaws</title>
+<style>
+body{margin:0;background:#05060a;color:#eee;font-family:system-ui,Segoe UI,Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh}
+#wrap{display:flex;gap:24px;align-items:center}
+#stage{position:relative;width:360px;height:360px;background:#0b0d14;border-radius:50%;display:flex;justify-content:center;align-items:center;overflow:hidden}
+#zero{width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,0.8);box-shadow:0 0 24px rgba(0,0,0,0.9)}
+#img{position:absolute;max-width:40%;max-height:40%;cursor:grab;display:none}
+#panel{min-width:260px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:4px 6px;border-bottom:1px solid #222;text-align:left}
+th{color:#aaa;font-weight:500}
+#amp{font-size:28px;font-weight:600;margin-bottom:8px}
+#slot{font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:#8af}
+#file{margin-top:12px;font-size:12px}
+</style>
 </head>
 <body>
+<div id="wrap">
+  <div id="stage">
+    <div id="zero"></div>
+    <img id="img">
+  </div>
+  <div id="panel">
+    <div id="amp">0.00</div>
+    <div id="slot">Slot 0 · Quiet</div>
+    <table>
+      <thead>
+        <tr><th>Slot</th><th>Range</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td>|A| &lt; 0.5</td><td id="s0">active</td></tr>
+        <tr><td>1</td><td>0.5–1.0</td><td id="s1">–</td></tr>
+        <tr><td>2</td><td>1.0–1.5</td><td id="s2">–</td></tr>
+        <tr><td>3</td><td>1.5–2.0</td><td id="s3">–</td></tr>
+        <tr><td>4</td><td>&gt;= 2.0</td><td id="s4">–</td></tr>
+      </tbody>
+    </table>
+    <input type="file" id="file" accept="image/jpeg,image/jpg">
+  </div>
+</div>
 
 <script>
-</script>
+const ampEl=document.getElementById("amp");
+const slotEl=document.getElementById("slot");
+const zero=document.getElementById("zero");
+const cells=[0,1,2,3,4].map(i=>document.getElementById("s"+i));
+const file=document.getElementById("file");
+const img=document.getElementById("img");
+const stage=document.getElementById("stage");
 
+function slotLabel(k){
+  if(k===0)return"Slot 0 · Quiet";
+  if(k===1)return"Slot 1 · Mild";
+  if(k===2)return"Slot 2 · Elevated";
+  if(k===3)return"Slot 3 · High";
+  return"Slot 4 · Extreme";
+}
+
+function tick(){
+  const a=(Math.random()*4-2).toFixed(2);
+  const v=Math.abs(a);
+  let k=0;
+  if(v>=0.5&&v<1)k=1;
+  else if(v>=1&&v<1.5)k=2;
+  else if(v>=1.5&&v<2)k=3;
+  else if(v>=2)k=4;
+  ampEl.textContent=a;
+  slotEl.textContent=slotLabel(k);
+  cells.forEach((c,i)=>c.textContent=i===k?"active":"–");
+  const scale=1+v*0.25;
+  const opacity=Math.min(0.9,0.4+v*0.2);
+  zero.style.transform="scale("+scale+")";
+  zero.style.background="rgba(0,0,0,"+opacity+")";
+}
+setInterval(tick,1200);
+
+file.addEventListener("change",e=>{
+  const f=e.target.files[0];
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    img.src=ev.target.result;
+    img.style.display="block";
+    img.style.left="50%";
+    img.style.top="50%";
+    img.style.transform="translate(-50%,-50%)";
+  };
+  r.readAsDataURL(f);
+});
+
+let drag=false,ox=0,oy=0;
+img.addEventListener("mousedown",e=>{
+  drag=true;
+  ox=e.clientX-img.offsetLeft;
+  oy=e.clientY-img.offsetTop;
+  img.style.cursor="grabbing";
+});
+document.addEventListener("mouseup",()=>{
+  drag=false;
+  img.style.cursor="grab";
+});
+document.addEventListener("mousemove",e=>{
+  if(!drag)return;
+  const x=e.clientX-ox;
+  const y=e.clientY-oy;
+  img.style.left=x+"px";
+  img.style.top=y+"px";
+});
+</script>  
 </body>
 </html>
