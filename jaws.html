@@ -59,7 +59,7 @@ body{
   overflow:hidden;
 }
 
-/* Shark GIF centerpiece */
+/* Shark GIF centerpiece (default opacity for FIRST GIF) */
 .centerGif{
   position:absolute;
   width:100%;
@@ -71,12 +71,17 @@ body{
   pointer-events:none;
 }
 
+/* SECOND GIF — MORE TRANSPARENT */
+.centerGif.second {
+  opacity:0.18;   /* adjust transparency here */
+}
+
 /* Solo Great White (SECOND IMAGE) — LOWERED */
 .big-shark {
   position: absolute;
   width: 70%;
   left: 50%;
-  top: 10px;               /* LOWERED from -35px → 10px */
+  top: 10px;
   transform: translateX(-50%);
   z-index: 5;
   pointer-events: none;
@@ -135,12 +140,14 @@ th{color:#aaa;font-weight:500}
 <div id="wrap">
   <div id="stage">
 
-    <!-- SHARK GIF CENTERPIECE -->
+    <!-- FIRST SHARK GIF -->
     <img class="centerGif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdvYTc2M3Q4ZjRxamV2c3Uzd3Y5bTR4Ynl6Y25rN3JkNHJxcGJwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AqP064Ap7tPOQmySbL/giphy.gif">
-    <img class="centerGif" src="https://media2.giphy.com/media/ygCH1tcZQEgruPzaSi/giphy.gif?cid=6c09b9522f3coamio6dhhvsajg1eycpie36lfmnk6k0b1s12">
 
-    <!-- SECOND IMAGE (GREAT WHITE) — LOWERED -->
-    <img class="big-shark" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDdvYTc2M3Q4ZjRxamV2c3Uzd3Y5bTR4Ynl6Y25rN3JkNHJxcGJwbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AqP064Ap7tPOQmySbL/giphy.gif">
+    <!-- SECOND SHARK GIF (MORE TRANSPARENT) -->
+    <img class="centerGif second" src="https://media2.giphy.com/media/ygCH1tcZQEgruPzaSi/giphy.gif?cid=6c09b9522f3coamio6dhhvsajg1eycpie36lfmnk6k0b1s12">
+
+    <!-- FOREGROUND SHARK -->
+    <img class="big-shark" src="https://i.imgur.com/5nQxw0H.png">
 
     <div id="zero"></div>
     <img id="img">
